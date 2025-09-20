@@ -41,29 +41,45 @@ s_1^'^"p1" = mat(delim: "[", -frac(L_1, 2); 0),
 
 so that e.g. $s_1^'^"p2"$ describes the local point p2 in body 1.
 
-The points 
+The coordinates for the $bold(C)$-vectors are:
+
+$
+bold(C_1) = mat(delim: "[",  0; 0),
+#h(1em) bold(C_2) = mat(delim: "[", 0; 0),
+#h(1em) bold(C_3) = mat(delim: "[", 0; 0),
+#h(1em) bold(C_4) = mat(delim: "[", 20; 0)
+$
+
+And the coordinates for the $bold(r)$-vectors are:
+
+$
+bold(r_1) = mat(delim: "[",  x_1; y_1),
+#h(1em) bold(r_2) = mat(delim: "[", x_2; y_2),
+#h(1em) bold(r_3) = mat(delim: "[", x_3; y_3)
+$
+
 
 The Kinematic constraint equations are as follows:
 
-- $Phi^"abs1" (q) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^1))) = mat(delim: "[",
+- $Phi^"abs1" (q) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^1 - C_1))) = mat(delim: "[",
  x_1 - frac(L_1, 2)cos(phi.alt_1); 
  y_1 - frac(L_1, 2)sin(phi.alt_1)) 
  = mat(delim: "[", 0;0)$
 
-- $Phi^"rel1" (q) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^2)) - bold(r_2 + bold(A"s"_2^'^P^2)))
+- $Phi^"rel1" (q) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^2)) - (bold(r_2 + bold(A"s"_2^'^P^2)))- bold(C_2))
  = mat(delim: "[",
- x_1 + frac(L_1, 2)cos(phi.alt_1) - x_2 -frac(L_2, 2)cos(phi.alt_2);
- y_1 + frac(L_1, 2)sin(phi.alt_1) - y_2 -frac(L_2, 2)sin(phi.alt_2))
+ x_1 + frac(L_1, 2)cos(phi.alt_1) - (x_2 -frac(L_2, 2)cos(phi.alt_2));
+ y_1 + frac(L_1, 2)sin(phi.alt_1) - (y_2 -frac(L_2, 2)sin(phi.alt_2)))
  = mat(delim: "[", 0;0)$
 
-- $Phi^"rel2" (q) = mat(delim: "[", bold(r_2 + bold(A"s"_2^'^P^3)) - bold(r_3 + bold(A"s"_3^'^P^3))) 
+- $Phi^"rel2" (q) = mat(delim: "[", bold(r_2 + bold(A"s"_2^'^P^3)) - (bold(r_3 + bold(A"s"_3^'^P^3)))- bold(C_3)) 
  = mat(delim: "[", 
- x_2 + frac(L_2, 2)cos(phi.alt_2) - x_3 -frac(L_3, 2)cos(phi.alt_3);
- y_2 + frac(L_2, 2)sin(phi.alt_2) - y_3 -frac(L_3, 2)sin(phi.alt_3))
+ x_2 + frac(L_2, 2)cos(phi.alt_2) - (x_3 -frac(L_3, 2)cos(phi.alt_3));
+ y_2 + frac(L_2, 2)sin(phi.alt_2) - (y_3 -frac(L_3, 2)sin(phi.alt_3)))
  = mat(delim: "[", 0;0)$
 
-- $Phi^"abs2" (q) = mat(delim: "[", bold(r_3 + bold(A"s"_3^'^P^4))) = mat(delim: "[",
- x_3 + frac(L_3, 2)cos(phi.alt_3);
+- $Phi^"abs2" (q) = mat(delim: "[", bold(r_3 + bold(A"s"_3^'^P^4 - C_4))) = mat(delim: "[",
+ x_3 + frac(L_3, 2)cos(phi.alt_3) - 20;
  y_3 + frac(L_3, 2)sin(phi.alt_3))
  = mat(delim: "[", 0;0)$
 
@@ -72,11 +88,11 @@ As a system of constraints the vectorfunction the above equations become:
 $Phi^K (q) = mat(delim: "[", Phi^"abs1" (q); Phi^"rev1" (q); Phi^"rev2" (q); Phi^"abs2" (q)) = mat(delim: "[",
  x_1 - frac(L_1, 2)cos(phi.alt_1); 
  y_1 - frac(L_1, 2)sin(phi.alt_1);
- x_1 + frac(L_1, 2)cos(phi.alt_1) - x_2 -frac(L_2, 2)cos(phi.alt_2);
- y_1 + frac(L_1, 2)sin(phi.alt_1) - y_2 -frac(L_2, 2)sin(phi.alt_2);
- x_2 + frac(L_2, 2)cos(phi.alt_2) - x_3 -frac(L_3, 2)cos(phi.alt_3);
- y_2 + frac(L_2, 2)sin(phi.alt_2) - y_3 -frac(L_3, 2)sin(phi.alt_3);
- x_3 + frac(L_3, 2)cos(phi.alt_3);
+ x_1 + frac(L_1, 2)cos(phi.alt_1) - (x_2 -frac(L_2, 2)cos(phi.alt_2));
+ y_1 + frac(L_1, 2)sin(phi.alt_1) - (y_2 -frac(L_2, 2)sin(phi.alt_2));
+ x_2 + frac(L_2, 2)cos(phi.alt_2) - (x_3 -frac(L_3, 2)cos(phi.alt_3));
+ y_2 + frac(L_2, 2)sin(phi.alt_2) - (y_3 -frac(L_3, 2)sin(phi.alt_3));
+ x_3 + frac(L_3, 2)cos(phi.alt_3) - 20;
  y_3 + frac(L_3, 2)sin(phi.alt_3);)
  = mat(delim: "[", 0;0;0;0;0;0;0;0;0) = mat(delim: "[", arrow.r(o))$
 
