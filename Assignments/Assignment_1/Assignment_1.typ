@@ -1,3 +1,9 @@
+#set page(header: [
+  _Sigurd Mousten Jager Nielsen_ #h(1fr) Aarhus Universitet - Computational Dynamics E25
+])
+
+#set page(numbering: "1 of 1")
+
 //helper function for derivatives:
 #let ded(upper, lower) = math.op($(partial #upper) / (partial #lower)$)
 
@@ -83,7 +89,7 @@ The Kinematic constraint equations are as follows:
  y_3 + frac(L_3, 2)sin(phi.alt_3))
  = mat(delim: "[", 0;0)$
 
-As a system of constraints the vectorfunction the above equations become:
+As a system of kinematic constraint equations the above equations become:
 
 $Phi^K (q) = mat(delim: "[", Phi^"abs1" (q); Phi^"rev1" (q); Phi^"rev2" (q); Phi^"abs2" (q)) = mat(delim: "[",
  x_1 - frac(L_1, 2)cos(phi.alt_1); 
@@ -188,7 +194,7 @@ $bold(gamma) = bold(Phi_q dot.double(q)) = bold(-(Phi_q dot(q))_q dot(q)),$ wher
 
 $bold(dot.double(q)) = bold(Phi_q)^(-1)(bold(-(Phi_q dot(q))_q dot(q)))$
 
-Before $bold(dot.double(q))$ can be solved for the term $bold(-(Phi_q dot(q))_q dot(q))$ has to be calculated in the order:
+Before $bold(dot.double(q))$ can be solved for, the term $bold(-(Phi_q dot(q))_q dot(q))$ is calculated in the order:
 
 1. $bold(Phi_q dot(q))$\
 2. $bold((Phi_q dot(q))_q)$\
@@ -224,12 +230,12 @@ Then
 $bold((Phi_q dot(q))_q) = ded(bold(Phi_q dot(q)), bold(q)) = mat(delim: "[",
 0, 0, dot(phi.alt_1)frac(L_1, 2)cos(phi.alt_1), 0, 0, 0, 0, 0, 0;
 0, 0, dot(phi.alt_1)frac(L_1, 2)sin(phi.alt_1), 0, 0, 0, 0, 0, 0;
-0, 0, dot(phi.alt_1)frac(L_1, 2)cos(phi.alt_1), 0, 0, -dot(phi.alt_2)frac(L_2, 2)cos(phi.alt_2), 0, 0, 0;
-0, 0, dot(phi.alt_1)frac(L_1, 2)sin(phi.alt_1), 0, 0, -dot(phi.alt_2)frac(L_2, 2)sin(phi.alt_2), 0, 0, 0;
-0, 0, 0, 0, 0, dot(phi.alt_2)frac(L_2, 2)cos(phi.alt_2), 0, 0, -dot(phi.alt_3)frac(L_3, 2)cos(phi.alt_3);
-0, 0, 0, 0, 0, dot(phi.alt_2)frac(L_2, 2)sin(phi.alt_2), 0, 0, -dot(phi.alt_3)frac(L_3, 2)sin(phi.alt_3);
-0, 0, 0, 0, 0, 0, 0, 0, dot(phi.alt_3)frac(L_3, 2)cos(phi.alt_3);
-0, 0, 0, 0, 0, 0, 0, 0, dot(phi.alt_3)frac(L_3, 2)sin(phi.alt_3);
+0, 0, -dot(phi.alt_1)frac(L_1, 2)cos(phi.alt_1), 0, 0, -dot(phi.alt_2)frac(L_2, 2)cos(phi.alt_2), 0, 0, 0;
+0, 0, -dot(phi.alt_1)frac(L_1, 2)sin(phi.alt_1), 0, 0, -dot(phi.alt_2)frac(L_2, 2)sin(phi.alt_2), 0, 0, 0;
+0, 0, 0, 0, 0, -dot(phi.alt_2)frac(L_2, 2)cos(phi.alt_2), 0, 0, -dot(phi.alt_3)frac(L_3, 2)cos(phi.alt_3);
+0, 0, 0, 0, 0, -dot(phi.alt_2)frac(L_2, 2)sin(phi.alt_2), 0, 0, -dot(phi.alt_3)frac(L_3, 2)sin(phi.alt_3);
+0, 0, 0, 0, 0, 0, 0, 0, -dot(phi.alt_3)frac(L_3, 2)cos(phi.alt_3);
+0, 0, 0, 0, 0, 0, 0, 0, -dot(phi.alt_3)frac(L_3, 2)sin(phi.alt_3);
 0, 0, 0, 0, 0, 0, 0, 0, 0;
 )$
 
@@ -238,26 +244,26 @@ and lastly
 $bold((Phi_q dot(q))_q dot(q))=$
 
 $mat(delim: "[",
-0, 0, dot(phi.alt_1)frac(L_1, 2)cos(phi.alt_1), 0, 0, 0, 0, 0, 0;
-0, 0, dot(phi.alt_1)frac(L_1, 2)sin(phi.alt_1), 0, 0, 0, 0, 0, 0;
-0, 0, dot(phi.alt_1)frac(L_1, 2)cos(phi.alt_1), 0, 0, -dot(phi.alt_2)frac(L_2, 2)cos(phi.alt_2), 0, 0, 0;
-0, 0, dot(phi.alt_1)frac(L_1, 2)sin(phi.alt_1), 0, 0, -dot(phi.alt_2)frac(L_2, 2)sin(phi.alt_2), 0, 0, 0;
-0, 0, 0, 0, 0, dot(phi.alt_2)frac(L_2, 2)cos(phi.alt_2), 0, 0, -dot(phi.alt_3)frac(L_3, 2)cos(phi.alt_3);
-0, 0, 0, 0, 0, dot(phi.alt_2)frac(L_2, 2)sin(phi.alt_2), 0, 0, -dot(phi.alt_3)frac(L_3, 2)sin(phi.alt_3);
-0, 0, 0, 0, 0, 0, 0, 0, dot(phi.alt_3)frac(L_3, 2)cos(phi.alt_3);
-0, 0, 0, 0, 0, 0, 0, 0, dot(phi.alt_3)frac(L_3, 2)sin(phi.alt_3);
+0, 0, dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1), 0, 0, 0, 0, 0, 0;
+0, 0, dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1), 0, 0, 0, 0, 0, 0;
+0, 0, -dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1), 0, 0, -dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2), 0, 0, 0;
+0, 0, -dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1), 0, 0, -dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2), 0, 0, 0;
+0, 0, 0, 0, 0, -dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2), 0, 0, -dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
+0, 0, 0, 0, 0, -dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2), 0, 0, -dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
+0, 0, 0, 0, 0, 0, 0, 0, -dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
+0, 0, 0, 0, 0, 0, 0, 0, -dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
 0, 0, 0, 0, 0, 0, 0, 0, 0;
 )
 mat(delim: "[", dot(x_1); dot(y_1); dot(phi.alt_1); dot(x_2); dot(y_2); dot(phi.alt_2); dot(x_3); dot(y_3); dot(phi.alt_3)) =
 mat(delim: "[",
 dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1);
 dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1);
-dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2);
-dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2);
-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
-dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
-dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
+-dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2);
+-dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2);
+-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
+-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
+-dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
+-dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
 0)
 $
 
@@ -268,13 +274,21 @@ $bold(gamma) = -bold((Phi_q dot(q))_q dot(q)) =
 mat(delim: "[",
 -dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1);
 -dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1);
-dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2);
-dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2);
-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
+dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1)+dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2);
+dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1)+dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2);
+dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2)+dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
+dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2)+dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
 dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
 dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
-0)$
+0) =
+mat(delim: "[",
+dot(phi.alt_1)^2A_1s_1^'^"p1";
+dot(phi.alt_1)^2A_1s_1^'^"p2" - dot(phi.alt_2)^2A_2s_2^'^"p2";
+dot(phi.alt_2)^2A_2s_2^'^"p3" - dot(phi.alt_3)^2A_3s_3^'^"p3";
+dot(phi.alt_3)^2A_3s_3^'^"p4";
+0;
+)
+$
 
 With the accelerations solved for:
 
@@ -286,10 +300,10 @@ mat(delim: "[", dot.double(x_1); dot.double(y_1); dot.double(phi.alt_1); dot.dou
 mat(delim: "[",
 1, 0, frac(L_1, 2)sin(phi.alt_1), 0, 0, 0, 0, 0, 0;
 0, 1, -frac(L_1, 2)cos(phi.alt_1), 0, 0, 0, 0, 0, 0;
-1, 0, -frac(L_1, 2)sin(phi.alt_1), -1, 0, frac(L_2, 2)sin(phi.alt_2), 0, 0, 0;
-0, 1, frac(L_1, 2)cos(phi.alt_1), 0, -1, -frac(L_2, 2)cos(phi.alt_2), 0, 0, 0;
-0, 0, 0, 1, 0, -frac(L_2, 2)sin(phi.alt_2), -1, 0, frac(L_3, 2)sin(phi.alt_3);
-0, 0, 0, 0, 1, frac(L_2, 2)cos(phi.alt_2), 0, -1, -frac(L_3, 2)cos(phi.alt_3);
+1, 0, -frac(L_1, 2)sin(phi.alt_1), -1, 0, -frac(L_2, 2)sin(phi.alt_2), 0, 0, 0;
+0, 1, frac(L_1, 2)cos(phi.alt_1), 0, -1, frac(L_2, 2)cos(phi.alt_2), 0, 0, 0;
+0, 0, 0, 1, 0, -frac(L_2, 2)sin(phi.alt_2), -1, 0, -frac(L_3, 2)sin(phi.alt_3);
+0, 0, 0, 0, 1, frac(L_2, 2)cos(phi.alt_2), 0, -1, frac(L_3, 2)cos(phi.alt_3);
 0, 0, 0, 0, 0, 0, 1, 0, -frac(L_3, 2)sin(phi.alt_3);
 0, 0, 0, 0, 0, 0, 0, 1, frac(L_3, 2)cos(phi.alt_3);
 0, 0, 1, 0, 0, 0, 0, 0, 0;
@@ -297,10 +311,10 @@ mat(delim: "[",
 mat(delim: "[",
 -dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1);
 -dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1);
-dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2);
-dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1)-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2);
-dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
-dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2)-dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
+dot(phi.alt_1)^2frac(L_1, 2)cos(phi.alt_1)+dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2);
+dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1)+dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2);
+dot(phi.alt_2)^2frac(L_2, 2)cos(phi.alt_2)+dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
+dot(phi.alt_2)^2frac(L_2, 2)sin(phi.alt_2)+dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
 dot(phi.alt_3)^2frac(L_3, 2)cos(phi.alt_3);
 dot(phi.alt_3)^2frac(L_3, 2)sin(phi.alt_3);
 0)
@@ -315,6 +329,10 @@ $
 
 //INSERT PICTURES HERE:
 
+
+=== 8. Initial configuration of the mechanism and the trajectories of the revolute joints:
+
+//INSERT PICTURES HERE:
 #figure(
   image("mechanism_first_frame.png")
 )
@@ -322,7 +340,3 @@ $
 #figure(
   image("mechanism_last_frame.png")
 )
-
-=== 8. Initial configuration of the mechanism and the trajectories of the revolute joints:
-
-//INSERT PICTURES HERE:
