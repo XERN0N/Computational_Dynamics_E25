@@ -12,7 +12,7 @@
 
 
 #figure(
-  image("Intro_pic.png")
+  image("intro_pic.png")
 )
 
 
@@ -23,7 +23,7 @@
 
 The number of bodies (nb) is 3 and there are 4 joints with 1 degree of freedom each (nh = 8).
 
-Therefore there degrees of freedom for the model is $3 dot "nb" - "nh" = 1$
+Therefore the degrees of freedom for the model is $3 dot "nb" - "nh" = 1$
 
 The remaining DoF will be governed by a driving constraint $Phi^D (q,t) = phi.alt_1 - omega t, #h(0.5cm) omega = 1.5 frac("rad", "s")$\
 
@@ -31,21 +31,23 @@ The remaining DoF will be governed by a driving constraint $Phi^D (q,t) = phi.al
 
 First A and r are defined:
 
-$A(phi.alt) = mat(delim: "[", cos(phi.alt), -sin(phi.alt); sin(phi.alt), cos(phi.alt)), #h(1em) r^p = r + A(phi.alt)s'^P, #h(1em) q = mat(delim: "[", x_1, y_1, phi.alt_1, x_2, y_2, phi.alt_2, x_3, y_3, phi.alt_3)^T$
+$bold(A)(phi.alt) = mat(delim: "[", cos(phi.alt), -sin(phi.alt); sin(phi.alt), cos(phi.alt)) in RR^("2x2"), #h(0.5em) bold(r^p = r + A)(phi.alt)bold(s'^P) in RR^2$
+
+$bold(q) = mat(delim: "[", x_1, y_1, phi.alt_1, x_2, y_2, phi.alt_2, x_3, y_3, phi.alt_3)^T in RR^9$
 
 
 The points for the joints are described by:
 
 $
 s_1^'^"p1" = mat(delim: "[", -frac(L_1, 2); 0),
-#h(1em) s_1^'^"p2" = mat(delim: "[", frac(L_1, 2); 0),
-#h(1em) s_2^'^"p2" = mat(delim: "[", -frac(L_2, 2); 0),
-#h(1em) s_2^'^"p3" = mat(delim: "[", frac(L_2, 2); 0),
-#h(1em) s_3^'^"p3" = mat(delim: "[", -frac(L_3, 2); 0),
-#h(1em) s_3^'^"p4" = mat(delim: "[", frac(L_3, 2); 0),
+#h(1em) bold(s_1^'^"p2") = mat(delim: "[", frac(L_1, 2); 0),
+#h(1em) bold(s_2^'^"p2") = mat(delim: "[", -frac(L_2, 2); 0),
+#h(1em) bold(s_2^'^"p3") = mat(delim: "[", frac(L_2, 2); 0),
+#h(1em) bold(s_3^'^"p3") = mat(delim: "[", -frac(L_3, 2); 0),
+#h(1em) bold(s_3^'^"p4") = mat(delim: "[", frac(L_3, 2); 0),
  $
 
-so that e.g. $s_1^'^"p2"$ describes the local point p2 in body 1.
+so that e.g. $bold(s_1^'^"p2")$ describes the local point p2 in body 1.
 
 The coordinates for the $bold(C)$-vectors are:
 
@@ -67,53 +69,53 @@ $
 
 The Kinematic constraint equations are as follows:
 
-- $Phi^"abs1" (q) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^1 - C_1))) = mat(delim: "[",
- x_1 - frac(L_1, 2)cos(phi.alt_1); 
- y_1 - frac(L_1, 2)sin(phi.alt_1)) 
+- $bold(Phi^"abs1" (q)) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^1 - C_1))) = mat(delim: "[",
+ x_1 - frac(L_1, 2)cos(phi.alt_1)-0; 
+ y_1 - frac(L_1, 2)sin(phi.alt_1)-0) 
  = mat(delim: "[", 0;0)$
 
-- $Phi^"rel1" (q) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^2)) - (bold(r_2 + bold(A"s"_2^'^P^2)))- bold(C_2))
+- $bold(Phi^"rel1" (q)) = mat(delim: "[", bold(r_1 + bold(A"s"_1^'^P^2)) - (bold(r_2 + bold(A"s"_2^'^P^2)))- bold(C_2))
  = mat(delim: "[",
- x_1 + frac(L_1, 2)cos(phi.alt_1) - (x_2 -frac(L_2, 2)cos(phi.alt_2));
- y_1 + frac(L_1, 2)sin(phi.alt_1) - (y_2 -frac(L_2, 2)sin(phi.alt_2)))
+ x_1 + frac(L_1, 2)cos(phi.alt_1) - (x_2 -frac(L_2, 2)cos(phi.alt_2))-0;
+ y_1 + frac(L_1, 2)sin(phi.alt_1) - (y_2 -frac(L_2, 2)sin(phi.alt_2))-0)
  = mat(delim: "[", 0;0)$
 
-- $Phi^"rel2" (q) = mat(delim: "[", bold(r_2 + bold(A"s"_2^'^P^3)) - (bold(r_3 + bold(A"s"_3^'^P^3)))- bold(C_3)) 
+- $bold(Phi^"rel2" (q)) = mat(delim: "[", bold(r_2 + bold(A"s"_2^'^P^3)) - (bold(r_3 + bold(A"s"_3^'^P^3)))- bold(C_3)) 
  = mat(delim: "[", 
- x_2 + frac(L_2, 2)cos(phi.alt_2) - (x_3 -frac(L_3, 2)cos(phi.alt_3));
- y_2 + frac(L_2, 2)sin(phi.alt_2) - (y_3 -frac(L_3, 2)sin(phi.alt_3)))
+ x_2 + frac(L_2, 2)cos(phi.alt_2) - (x_3 -frac(L_3, 2)cos(phi.alt_3))-0;
+ y_2 + frac(L_2, 2)sin(phi.alt_2) - (y_3 -frac(L_3, 2)sin(phi.alt_3))-0)
  = mat(delim: "[", 0;0)$
 
-- $Phi^"abs2" (q) = mat(delim: "[", bold(r_3 + bold(A"s"_3^'^P^4 - C_4))) = mat(delim: "[",
+- $bold(Phi^"abs2" (q)) = mat(delim: "[", bold(r_3 + bold(A"s"_3^'^P^4 - C_4))) = mat(delim: "[",
  x_3 + frac(L_3, 2)cos(phi.alt_3) - 20;
- y_3 + frac(L_3, 2)sin(phi.alt_3))
+ y_3 + frac(L_3, 2)sin(phi.alt_3) - 0)
  = mat(delim: "[", 0;0)$
 
 As a system of kinematic constraint equations the above equations become:
 
-$Phi^K (q) = mat(delim: "[", Phi^"abs1" (q); Phi^"rev1" (q); Phi^"rev2" (q); Phi^"abs2" (q)) = mat(delim: "[",
- x_1 - frac(L_1, 2)cos(phi.alt_1); 
- y_1 - frac(L_1, 2)sin(phi.alt_1);
- x_1 + frac(L_1, 2)cos(phi.alt_1) - (x_2 -frac(L_2, 2)cos(phi.alt_2));
- y_1 + frac(L_1, 2)sin(phi.alt_1) - (y_2 -frac(L_2, 2)sin(phi.alt_2));
- x_2 + frac(L_2, 2)cos(phi.alt_2) - (x_3 -frac(L_3, 2)cos(phi.alt_3));
- y_2 + frac(L_2, 2)sin(phi.alt_2) - (y_3 -frac(L_3, 2)sin(phi.alt_3));
+$bold(Phi^K (q)) = mat(delim: "[", bold(Phi^"abs1" (q)); bold(Phi^"rev1" (q)); bold(Phi^"rev2" (q)); bold(Phi^"abs2" (q))) = mat(delim: "[",
+ x_1 - frac(L_1, 2)cos(phi.alt_1)-0; 
+ y_1 - frac(L_1, 2)sin(phi.alt_1)-0;
+ x_1 + frac(L_1, 2)cos(phi.alt_1) - (x_2 -frac(L_2, 2)cos(phi.alt_2))-0;
+ y_1 + frac(L_1, 2)sin(phi.alt_1) - (y_2 -frac(L_2, 2)sin(phi.alt_2))-0;
+ x_2 + frac(L_2, 2)cos(phi.alt_2) - (x_3 -frac(L_3, 2)cos(phi.alt_3))-0;
+ y_2 + frac(L_2, 2)sin(phi.alt_2) - (y_3 -frac(L_3, 2)sin(phi.alt_3))-0;
  x_3 + frac(L_3, 2)cos(phi.alt_3) - 20;
- y_3 + frac(L_3, 2)sin(phi.alt_3);)
- = mat(delim: "[", 0;0;0;0;0;0;0;0) = mat(delim: "[", arrow.r(o))$
+ y_3 + frac(L_3, 2)sin(phi.alt_3)-0;)
+ = mat(delim: "[", 0;0;0;0;0;0;0;0) = mat(delim: "[", bold(arrow.r(o)))$
 
 
-=== 3. Setup of the driving constraint $Phi^D$ that imposes $phi.alt_1 = omega t, #h(1em) omega = 1.5 frac("rad", "s")$
+=== 3. Setup of the driving constraint $bold(Phi)^D$ that imposes $phi.alt_1 = omega t, #h(1em) omega = 1.5 frac("rad", "s")$
 #v(0.5em) As there is 1 DoF for the system, an absolute driving constraint is added to the system:
 
-$Phi^D (q,t) = mat(delim: "[", phi.alt_1 - omega t) = 0$
+$bold(Phi)^D (bold(q),t) = mat(delim: "[", phi.alt_1 - omega t) = 0$
 
 === 4. Calculate the constraint jacobian $Phi_q$
 First B is defined:
 
-$B(phi.alt) = mat(delim: "[", -sin(phi.alt), -cos(phi.alt); cos(phi.alt), -sin(phi.alt))$
+$bold(B(phi.alt)) = mat(delim: "[", -sin(phi.alt), -cos(phi.alt); cos(phi.alt), -sin(phi.alt))$
 
-by combining $Phi^K$ and $Phi^D$ into $Phi$ and then taking the partial derivative with respect to $q$ the constraint jacobian $Phi_q$ can be obtained:
+by combining $bold(Phi^K)$ and $bold(Phi^D)$ into $bold(Phi)$ and then taking the partial derivative with respect to $bold(q)$ the constraint jacobian $bold(Phi_q)$ can be obtained:
 
 $bold(Phi_q) = ded(Phi,q) = mat(delim: "[", ded(Phi^K, q); ded(Phi^D, q))
 =
@@ -138,7 +140,7 @@ mat(delim: "[",
 )
 $
 
-=== 5. Setup of the velocity and acceleration equations $nu$ and $gamma$
+=== 5. Setup of the velocity and acceleration equations $bold(nu)$ and $bold(gamma)$
 
 //Velocities -----------------------------------------------
 #v(0.5em)
@@ -185,7 +187,7 @@ The acceleration equations are defined as:
 $bold(gamma) = bold(Phi_q dot.double(q)) = bold(-(Phi_q dot(q))_q dot(q)) - 2 bold(Phi)_(bold(q)t)bold(dot(q)) - bold(Phi)_"tt",$
 #h(1em) where $bold(dot.double(q)) = mat(delim: "[", dot.double(x_1), dot.double(y_1), dot.double(phi.alt_1), dot.double(x_2), dot.double(y_2), dot.double(phi.alt_2), dot.double(x_3), dot.double(y_3), dot.double(phi.alt_3))^T$
 
-As $bold(Phi_q)$ does not contain $t$, $bold(Phi)_(bold(q)"t") = [arrow.r(0)]$ and as only $bold(Phi)^D$ is dependant on time:
+As $bold(Phi_q)$ does not contain $t$, $bold(Phi)_(bold(q)"t") = [bold(arrow.r(0))]$ and as only $bold(Phi)^D$ is dependant on time:
 
 $bold(Phi)_"tt" = frac(diff^2bold(Phi)^D, diff^2t) = ded(bold(Phi)_t^D, t) = [arrow.r(0)]$
 
@@ -267,6 +269,7 @@ dot(phi.alt_1)^2frac(L_1, 2)sin(phi.alt_1);
 0)
 $
 
+#pagebreak()
 #v(1em)
 Then the expression for $bold(gamma)$ is:
 
@@ -326,25 +329,39 @@ $
 The code has been implemented in python 3.12 and can be seen in the appendix or in the attached file in a jupyter notebook format. It should be able to run with the datascience environment. Otherwise the dependencies can be installed using the comments.
 //INSERT CODE HERE:
 
-
+#pagebreak()
 === 7. The motion of the mechanism plotted for 10 seconds:
+In the figure below the complete trajectories of the two revolute joints during the 10 seconds can be viewed. Link 1 is rotating clockwise.
+#figure(
+  image("mechanism_last_frame.png")
+)
 
+#pagebreak()
+=== 8. Initial configuration of the mechanism and the trajectories of the revolute joints:
+
+#v(0.5em)
+In the figure below the initial configuration of the mechanism can be viewed. As the initial guess in the code aimed for a configuration with a positive y-position for the joint number 3, this is what is plotted. An inverted position would also have been a valid solution for the solver.
+//INSERT PICTURES HERE:
+#figure(
+  image("mechanism_first_frame.png")
+)
+#pagebreak()
+
+=== 9. Plot of the generalized coordinates vs time:
+#v(0.5em)
+The plot below shows the different values in the q-vector (generalized coordinates) over time.
 //INSERT PICTURES HERE:
 #figure(
   image("mechanism_plots.png")
 )
 
-
-=== 8. Initial configuration of the mechanism and the trajectories of the revolute joints:
-
-//INSERT PICTURES HERE:
-#figure(
-  image("mechanism_first_frame.png")
-)
+#pagebreak()
+To give a reduced plot of just the angles of the three bodies the figure below is the same plot, but with only the angles.
 
 #figure(
-  image("mechanism_last_frame.png")
+  image("mechanism_plots_reduced.png")
 )
+#pagebreak()
 
 == Appendix
 
@@ -785,4 +802,48 @@ axes[2].grid(True)
 plt.show()
 fig.savefig("mechanism_plots.png", dpi=300, bbox_inches="tight")
 
+```
+
+For the angular plot:
+
+```python
+# --- NEW CELL: 3-row subplots for positions / velocities / accelerations ---
+position_matrix, velocity_matrix, acceleration_matrix = test_example, test_velocity, test_acceleration
+# Use the time vector already in your workspace
+try:
+    t = time_vector
+except NameError:
+    t = test_time_vector  # fallback if you kept this name
+
+#labels = ['x1','y1','phi1','x2','y2','phi2','x3','y3','phi3']
+labels = ['phi1','phi2','phi3']
+
+fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(12, 9), dpi=120, sharex=True)
+
+# Positions
+axes[0].set_title('Positions')
+axes[0].set_ylabel('Positions [rad]')
+for i, name in enumerate(labels):
+    axes[0].plot(t, position_matrix[((i+1)*3-1), :], label=name)
+axes[0].grid(True)
+axes[0].legend(loc='upper right', ncol=3, fontsize=8)
+
+# Velocities
+axes[1].set_title('Velocities')
+axes[1].set_ylabel('Velocities [rad/s]')
+for i in range(3):
+    axes[1].plot(t, velocity_matrix[((i+1)*3-1), :])
+axes[1].grid(True)
+
+# Accelerations
+axes[2].set_title('Accelerations')
+axes[2].set_ylabel('Accelerations [rad/s²]')
+for i in range(3):
+    axes[2].plot(t, acceleration_matrix[((i+1)*3-1), :])
+axes[2].set_xlabel('Time [s]')
+axes[2].grid(True)
+
+#fig.tight_layout()
+plt.show()
+fig.savefig("mechanism_plots_reduced.png", dpi=300, bbox_inches="tight")
 ```
