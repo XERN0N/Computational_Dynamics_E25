@@ -1,5 +1,6 @@
 import jax
 import jax.numpy as jnp
+from mech_types import Mechanism
 #from jax import jit, vmap, jacfwd, grad
 #import numpy as np
 #import matplotlib.pyplot as plt
@@ -85,7 +86,7 @@ class MechanismBuilder:
         x, y = gravity
         self.options["gravity"] = tuple((float(x), float(y)))
 
-    def compile(self):
+    def compile(self) -> Mechanism:
         float_dtype = jnp.float64
         int_dtype = jnp.int32
 
@@ -373,7 +374,12 @@ class MechanismBuilder:
             "DoFs": 3 * number_of_bodies - number_of_rows_all,
         }
 
-        return parameters, layout, initial_configuration, report
+        return Mechanism(
+            parameters=parameters,
+            layout=layout,
+            q0=initial_configuration,
+            report=report,
+        )
 
 
     def __call__(self, *args, **kwds):

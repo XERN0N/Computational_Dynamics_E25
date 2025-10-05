@@ -5,6 +5,8 @@ import jax.numpy as jnp
 import jax.typing as jnpt
 from functools import partial
 
+
+
 class body_2D:
 
     def __init__(self, x_function=None, y_function=None, time_vector: jnpt.ArrayLike = None, local_points=None):
@@ -12,6 +14,7 @@ class body_2D:
         self.y_func = y_function
         self.time_vec = time_vector
         self.local_point_vec = local_points
+        print("THIS CLASS IS DEPRECTED, PLEASE USE SOMETHING ELSE")
 
     def set_local_point(self, local_point, operation="add"):
         """ 
