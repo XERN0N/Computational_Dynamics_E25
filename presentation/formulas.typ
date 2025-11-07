@@ -45,6 +45,6 @@ bold(dot(phi.alt))_j;
 //GAMMA
 
 $bold(gamma)^t(i,j) = - mat(delim: "[",
-bold(v)_i^'^T [bold(B)_"ij"bold(s)_j^'^p (bold(dot(phi.alt_j-phi.alt_i)))^2 - bold(B)_i^T (bold(r)_j - bold(r)_i)bold(dot(phi.alt))_i^2 - 2 bold(A)_i^T (bold(dot(r)_j - bold(dot(r)_i)))bold(dot(phi.alt))_i];
+bold(v)_i^'^T [bold(B)_"ij"bold(s)_j^'^p (bold(dot(phi.alt_j)-dot(phi.alt_i)))^2 - bold(B)_i^T (bold(dot(r)_j) - bold(dot(r)_i))bold(dot(phi.alt))_i^2 - 2 bold(A)_i^T (bold(dot(r)_j - bold(dot(r)_i)))bold(dot(phi.alt))_i];
 0
 )$
